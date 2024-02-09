@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div
+        class="container mx-auto flex items-center justify-between py-2 px-2"
+      >
+        <!-- Brand -->
+        <div class="flex items-center">
+          <img src="./images/logo.png" alt="Logo" class="h-14 mr-2" />
+          <h1 class="text-lg font-bold hidden md:block">Makaranda</h1>
+        </div>
+        <!-- Navigation -->
+        <nav class="flex flex-col md:flex-row items-center justify-center">
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Students</a
+          >
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Coordinators</a
+          >
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Teachers</a
+          >
+        </nav>
+
+        <!-- Search Box -->
+        <div class="flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="border border-gray-300 rounded-md px-2 py-1 mr-2"
+          />
+          <button class="bg-blue-500 text-white px-4 py-1 rounded-md">
+            Search
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Side Navbar -->
+    <div class="flex flex-col md:flex-row h-screen">
+      <div class="bg-gray-800 text-white w-full md:w-64 py-6 px-4">
+        <ul class="mt-2">
+          <li class="mb-2">
+            <a
+              href=""
+              onclick="showContent('about')"
+              class="block text-gray-300 hover:text-white"
+              >About</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href=""
+              onclick="showContent('schedule')"
+              class="block text-gray-300 hover:text-white"
+              >Schedule</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="lessons.html" class="block text-gray-300 hover:text-white"
+              >Lesson Plans</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white"
+              >Suggestions</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white">Quiz</a>
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white"
+              >Registrations</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white">Help</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Main Content -->
+      <div class="flex-1" id="mainContent">
+        <!-- Dynamic content will be loaded here -->
+        <!-- Top Jumbotron -->
+        <div class="bg-blue-600 text-white py-10 md:py-20 px-4" id="about">
+          <h1 class="text-2xl md:text-4xl font-bold">
+            Welcome to Nanage Kannada Gottu Program
+          </h1>
+          <p class="mt-2 md:mt-4 text-base md:text-lg">
+            Taking Kannada to Everyone's Heart and Home
+          </p>
+          <p class="mt-2 md:mt-4 text-base md:text-lg">
+            ಕನ್ನಡವನ್ನು ಪ್ರತಿಯೊಬ್ಬರ ಹೃದಯ ಮತ್ತು ಮನೆಗೆ ಕೊಂಡೊಯ್ಯುವುದು
+          </p>
+        </div>
+        <!-- schedule -->
+        <div class="container mx-auto py-8 px-4 content hidden" id="schedule">
+          <h2 class="text-2xl font-bold mb-2">Schedule</h2>
+          <h2 class="mb-2">👉 Click on the Button to Join Online Class</h2>
+          <table>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+            </tr>
+            <tr>
+              <td>10:00 AM</td>
+              <!-- Monday -->
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button
+                  onclick="window.open(on4Url, '_blank')"
+                  class="on-button"
+                >
+                  ON4
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td>
+                <button
+                  onclick="window.open(on4Url, '_blank')"
+                  class="on-button"
+                >
+                  ON4
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+            </tr>
+            <tr>
+              <td>11:00 AM</td>
+              <!-- Tuesday -->
+              <td></td>
+              <td>
+                <button class="f2f-button">F2F2</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td>
+                <button class="f2f-button">F2F2</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td>
+                <button
+                  onclick="window.open(on2Url, '_blank')"
+                  class="on-button"
+                >
+                  ON2
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td>
+                <button
+                  onclick="window.open(on2Url, '_blank')"
+                  class="on-button"
+                >
+                  ON2
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+            </tr>
+            <tr>
+              <td>11:30 AM</td>
+              <!-- Wednesday -->
+              <td>
+                <button class="f2f-button">F2F3</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td>
+                <button class="f2f-button">F2F3</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2:00 PM</td>
+              <!-- Thursday -->
+              <td></td>
+              <td>
+                <button
+                  onclick="window.open(on3Url, '_blank')"
+                  class="on-button"
+                >
+                  ON3
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td></td>
+              <td>
+                <button
+                  onclick="window.open(on3Url, '_blank')"
+                  class="on-button"
+                >
+                  ON3
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4:00 PM</td>
+              <!-- Friday -->
+              <td></td>
+              <td></td>
+              <td>
+                <button class="f2f-button">F2F1</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td>
+                <button class="f2f-button">F2F1</button>
+                <div class="location-text">Music room</div>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>6:00 PM</td>
+              <!-- Saturday -->
+              <td>
+                <button
+                  onclick="window.open(on1Url, '_blank')"
+                  class="on-button"
+                >
+                  ON1
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button
+                  onclick="window.open(on1Url, '_blank')"
+                  class="on-button"
+                >
+                  ON1
+                </button>
+                <div class="location-text">Online</div>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Get references to the button and dropdown menu
+      const menuBtn = document.getElementById("menuBtn");
+      const menuDropdown = document.getElementById("menuDropdown");
+
+      function showContent(contentId) {
+        event.preventDefault();
+        // Hide all content
+        var contents = document.getElementsByClassName("content");
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].style.display = "none";
+        }
+
+        // Show the selected content
+        document.getElementById(contentId).style.display = "block";
+      }
+    </script>
+  </body>
+</html>

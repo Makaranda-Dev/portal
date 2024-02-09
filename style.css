@@ -1,0 +1,46 @@
+table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #dddddd;
+  text-align: center; /* Center align text within cells */
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 12px;
+  margin: 0 auto; /* Center align buttons horizontally */
+  display: block;
+}
+
+button.on-button {
+  background-color: #017bfe;
+}
+
+button.f2f-button {
+  background-color: #14a2b8;
+}
+
+h2 {
+  text-align: center; /* Center align the heading */
+}
+
+.location-text {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #888888;
+}
