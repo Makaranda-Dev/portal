@@ -75,7 +75,10 @@
             >
           </li>
           <li class="mb-2">
-            <a href="lessons.html" class="block text-gray-300 hover:text-white"
+            <a
+              href=""
+              onclick="showContent('lessonPlans')"
+              class="block text-gray-300 hover:text-white"
               >Lesson Plans</a
             >
           </li>
@@ -85,10 +88,16 @@
             >
           </li>
           <li class="mb-2">
-            <a href="kannadaquiz.html" class="block text-gray-300 hover:text-white">Quiz</a>
+            <a
+              href="kannadaquiz.html"
+              class="block text-gray-300 hover:text-white"
+              >Quiz</a
+            >
           </li>
           <li class="mb-2">
-            <a href="registrations.html" class="block text-gray-300 hover:text-white"
+            <a
+              href="registrations.html"
+              class="block text-gray-300 hover:text-white"
               >Registrations</a
             >
           </li>
@@ -274,6 +283,45 @@
               </td>
               <td></td>
               <td></td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- lessonPlans -->
+        <div
+          class="container mx-auto py-8 px-4 content hidden"
+          id="lessonPlans"
+        >
+          <h2 class="text-2xl font-bold mb-2">Lesson Plans</h2>
+          <table>
+            <tr>
+              <th>Session</th>
+              <th>Topic</th>
+              <th>Duration</th>
+              <th>Content</th>
+              <th>Audio</th>
+            </tr>
+            <tr>
+              <td>Lesson Intro</td>
+              <td>Introduction</td>
+              <td>5 Min</td>
+              <td>
+                <button
+                  onclick="window.open('https://drive.google.com/drive/folders/1gFEVgxIWwayM1cUJXjsTTwdKPLWmqTd2?usp=drive_link', '_blank')"
+                  class="on-button"
+                >
+                  Click to Open
+                </button>
+              </td>
+              <td>
+                <audio controls>
+                  <source
+                    src="https://drive.google.com/file/d/1EYWRhxy0StlO5lQzj2Y-jLBY4alKRAgI/view?usp=sharing"
+                    type="audio/mp3"
+                  />
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
             </tr>
           </table>
         </div>

@@ -1,0 +1,36 @@
+Wish List (Product Backlog)
+===========================
+- Standard Template GUI (switching to Tailwind CLI with tailwind.config)
+- Database of ex-students, photo
+- Database of coordinators
+- Pronounciation Table - done
+- Data Dictionary (keyboard - pdf mapping)
+- Gallery Page
+
+Bugs
+===========================
+- Bug1
+
+Abhinav - done
+===========================
+- Lesson Plan table - done
+- Dynmically load the right pane
+- Hide the Welcome message on other pages
+
+
+Venkatesh
+===========================
+- Add more rows for lesson plans
+- Explore diabled audio link
+
+
+Developer1
+===========================
+- Item 1
+
+
+Data Dictionary
+{
+    "horaduttane" : ['lesson1.pdf', 'lesson2.pdf'],
+    "yaaake": ['lesson2.pdf', 'lesson4.pdf']
+}
