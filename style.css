@@ -44,3 +44,35 @@ h2 {
   font-size: 14px;
   color: #888888;
 }
+
+.mymargin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* or set to a specific height */
+}
+
+.pdf-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px; /* Optional: to constrain the max width */
+}
+.on-button {
+  background-color: #007bff; 
+  color: white; 
+  padding: 10px 20px; 
+  border: none; 
+  border-radius: 5px; 
+  text-align: center; 
+  text-decoration: none; 
+  display: inline-block; 
+  cursor: pointer; 
+  font-size: 16px; 
+  transition: background-color 0.3s ease; 
+}
+
+.on-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
