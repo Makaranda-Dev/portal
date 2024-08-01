@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div
+        class="container mx-auto flex items-center justify-between py-2 px-2"
+      >
+        <!-- Brand -->
+        <div class="flex items-center">
+          <img src="./images/logo.png" alt="Logo" class="h-14 mr-2" />
+          <h1 class="text-lg font-bold hidden md:block">Makaranda</h1>
+        </div>
+        <!-- Navigation -->
+        <nav class="flex flex-col md:flex-row items-center justify-center">
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Students</a
+          >
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Coordinators</a
+          >
+          <a
+            href="#"
+            class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4"
+            >Teachers</a
+          >
+        </nav>
+
+        <!-- Search Box -->
+        <div class="flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="border border-gray-300 rounded-md px-2 py-1 mr-2"
+          />
+          <button class="bg-blue-500 text-white px-4 py-1 rounded-md">
+            Search
+          </button>
+        </div>
+      </div>
+    </header>
+
+<!-- Side Navbar -->
+    <div class="flex flex-col md:flex-row h-screen">
+      <div class="bg-gray-800 text-white w-full md:w-64 py-6 px-4">
+        <ul class="mt-2">
+          <li class="mb-2">
+            <a
+              href=""
+              onclick="showContent('about')"
+              class="block text-gray-300 hover:text-white"
+              >About</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href=""
+              onclick="showContent('schedule')"
+              class="block text-gray-300 hover:text-white"
+              >Schedule</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href=""
+              onclick="showContent('lessonPlans')"
+              class="block text-gray-300 hover:text-white"
+              >Lesson Plans</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white"
+              >Suggestions</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="kannadaquiz.html"
+              class="block text-gray-300 hover:text-white"
+              >Quiz</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="registrations.html"
+              class="block text-gray-300 hover:text-white"
+              >Registrations</a
+            >
+          </li>
+          <li class="mb-2">
+            <a href="#" class="block text-gray-300 hover:text-white">Help</a>
+          </li>
+        </ul>
+      </div>
+      <!-- Main Content -->
+      <div class="flex-1" id="mainContent">
+        <!-- Dynamic content will be loaded here -->
+        <!-- Top Jumbotron -->
+        <div class="bg-blue-600 text-white py-10 md:py-20 px-4" id="about">
+          <h1 class="text-2xl md:text-4xl font-bold">
+            Welcome to Nanage Kannada Gottu Program
+          </h1>
+          <p class="mt-2 md:mt-4 text-base md:text-lg">
+            Taking Kannada to Everyone's Heart and Home
+          </p>
+          <p class="mt-2 md:mt-4 text-base md:text-lg">
+            ಕನ್ನಡವನ್ನು ಪ್ರತಿಯೊಬ್ಬರ ಹೃದಯ ಮತ್ತು ಮನೆಗೆ ಕೊಂಡೊಯ್ಯುವುದು
+          </p>
+        </div>
+        <!-- schedule -->
+
+
+        <section class="contact-details">
+            <div class="text-center container">
+                <br><br>
+              <div class="row">
+
+                  <span class="section-title__tagline"><h3> Download PDF of lesson - Lesson1-PartA
+                  </span></h3><br>
+                       <div class="enqy">
+                          <!--<div class="text-center"><a href="images/pdf/koravi-rainbow.pdf" class="btn btn-warning btn-md " attributes-list download ="Brochure" role="button">Download PDF-->
+                          <!--    Now</a>  -->
+                          <!--</div>-->
+                          <div class="mymargin">
+                            <div class="pdf-container">
+                              <embed src="images/pdf/Nikoo1-Makaranda-Kannada-Lesson1-PartA.pdf" height="700px" width="900px">
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+         </section>   
+       
+       
+
+        
+  </body>
+</html>
