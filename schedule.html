@@ -66,8 +66,8 @@
     <script>
       document.getElementById('loadSchedule').addEventListener('click', function() {
         // Replace with your Google Drive file ID
-        const fileId = 'YOUR_FILE_ID_HERE';
-        const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
+        const fileId = '1RnWhsM2JOQIYpWdh1Ic7iOv8PCYU-lqK';
+        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
         
         fetch(url)
           .then(response => response.arrayBuffer())
