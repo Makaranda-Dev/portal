@@ -39,4 +39,62 @@
 
     <!-- Main Content -->
     <div class="container mx-auto py-8 px-4">
-        <h1 class="text-2xl font-bold mb-4">Batch
+        <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
+        <table id="scheduleTable" class="min-w-full bg-white border border-gray-300 mt-4">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">Batch Name</th>
+                    <th class="border px-4 py-2">Teacher</th>
+                    <th class="border px-4 py-2">Coordinator1</th>
+                    <th class="border px-4 py-2">Coordinator2</th>
+                    <th class="border px-4 py-2">Day1</th>
+                    <th class="border px-4 py-2">Day2</th>
+                    <th class="border px-4 py-2">Timing from</th>
+                    <th class="border px-4 py-2">Timing to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Replace with your Google Drive file ID
+        const fileId = '1RnWhsM2JOQIYpWdh1Ic7iOv8PCYU-lqK';
+        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
+
+        fetch(url)
+          .then(response => response.arrayBuffer())
+          .then(data => {
+            // Parse the Excel file
+            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const tableBody = document.querySelector('#scheduleTable tbody');
+            tableBody.innerHTML = '';
+
+            rows.forEach((row, index) => {
+              if (index === 0) return; // Skip header row
+
+              const tr = document.createElement('tr');
+
+              // Assuming row[0] to row[7] corresponds to the columns
+              for (let i = 0; i < 8; i++) {
+                const td = document.createElement('td');
+                td.textContent = row[i] !== undefined ? row[i] : '';
+                td.className = 'border px-4 py-2';
+                tr.appendChild(td);
+              }
+
+              tableBody.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Error loading the Excel file:', error));
+      });
+    </script>
+</body>
+</html>
