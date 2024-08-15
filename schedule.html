@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto flex items-center justify-between py-2 px-2">
+        <div class="flex items-center">
+          <img src="./images/logo.png" alt="Logo" class="h-14 mr-2" />
+          <h1 class="text-lg font-bold hidden md:block">Makaranda</h1>
+        </div>
+        <nav class="flex flex-col md:flex-row items-center justify-center">
+          <a href="index.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Home</a>
+          <a href="schedule.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Schedule</a>
+          <a href="#" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Lesson Plans</a>
+          <!-- Add other navigation items here -->
+        </nav>
+        <div class="flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="border border-gray-300 rounded-md px-2 py-1 mr-2"
+          />
+          <button class="bg-blue-500 text-white px-4 py-1 rounded-md">
+            Search
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
+        <button id="loadSchedule" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+          Load Schedule from Google Drive
+        </button>
+        <table id="scheduleTable" class="min-w-full bg-white border border-gray-300 mt-4">
+            <thead>
+                <tr>
+                    <th class="border px-4 py-2">Batch Name</th>
+                    <th class="border px-4 py-2">Teacher</th>
+                    <th class="border px-4 py-2">Coordinator</th>
+                    <th class="border px-4 py-2">Day1</th>
+                    <th class="border px-4 py-2">Day2</th>
+                    <th class="border px-4 py-2">Timing from</th>
+                    <th class="border px-4 py-2">Timing to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      document.getElementById('loadSchedule').addEventListener('click', function() {
+        // Replace with your Google Drive file ID
+        const fileId = 'YOUR_FILE_ID_HERE';
+        const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
+        
+        fetch(url)
+          .then(response => response.arrayBuffer())
+          .then(data => {
+            // Parse the Excel file
+            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const tableBody = document.querySelector('#scheduleTable tbody');
+            tableBody.innerHTML = '';
+            rows.forEach((row, index) => {
+              if (index === 0) return; // Skip header row
+              const tr = document.createElement('tr');
+              row.forEach((cell, cellIndex) => {
+                const td = document.createElement('td');
+                td.textContent = cell;
+                td.className = 'border px-4 py-2';
+                tr.appendChild(td);
+              });
+              // Add the "Timing from" and "Timing to" columns
+              // Adjust the following lines if your data structure changes
+              if (row.length > 5) {
+                const timingFrom = document.createElement('td');
+                timingFrom.textContent = row[5] || ''; // Adjust index as necessary
+                timingFrom.className = 'border px-4 py-2';
+                tr.appendChild(timingFrom);
+
+                const timingTo = document.createElement('td');
+                timingTo.textContent = row[6] || ''; // Adjust index as necessary
+                timingTo.className = 'border px-4 py-2';
+                tr.appendChild(timingTo);
+              }
+              tableBody.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Error loading the Excel file:', error));
+      });
+    </script>
+</body>
+</html>
