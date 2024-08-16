@@ -8,7 +8,37 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Custom Styles */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #d1d5db; /* Tailwind gray-300 */
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f3f4f6; /* Tailwind gray-100 */
+        font-weight: bold;
+      }
+      td {
+        background-color: #ffffff;
+      }
+      tr:nth-child(even) {
+        background-color: #f9fafb; /* Tailwind gray-50 */
+      }
+      tr:nth-child(odd) {
+        background-color: #ffffff;
+      }
+      .batch-name {
+        font-size: 0.875rem; /* Smaller font size */
+        white-space: nowrap; /* Prevent text wrapping */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+      }
+    </style>
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
@@ -40,7 +70,7 @@
     <!-- Main Content -->
     <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
-        <table id="scheduleTable" class="min-w-full bg-white border border-gray-300 mt-4">
+        <table id="scheduleTable">
             <thead>
                 <tr>
                     <th class="border px-4 py-2">Batch Name</th>
@@ -87,6 +117,9 @@
                 const td = document.createElement('td');
                 td.textContent = row[i] !== undefined ? row[i] : '';
                 td.className = 'border px-4 py-2';
+                if (i === 0) {
+                  td.classList.add('batch-name'); // Add batch-name class to batch name column
+                }
                 tr.appendChild(td);
               }
 
