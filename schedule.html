@@ -16,8 +16,9 @@
       }
       th, td {
         border: 1px solid #d1d5db; /* Tailwind gray-300 */
-        padding: 8px;
+        padding: 4px 8px; /* Reduced padding for better fit */
         text-align: left;
+        font-size: 0.875rem; /* Smaller font size */
       }
       th {
         background-color: #f3f4f6; /* Tailwind gray-100 */
@@ -33,10 +34,14 @@
         background-color: #ffffff;
       }
       .batch-name {
-        font-size: 0.875rem; /* Smaller font size */
+        font-size: 0.75rem; /* Even smaller font size for batch names */
         white-space: nowrap; /* Prevent text wrapping */
         overflow: hidden;
         text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+      }
+      .table-container {
+        overflow-x: auto; /* Handle horizontal overflow */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
       }
     </style>
 </head>
@@ -70,23 +75,25 @@
     <!-- Main Content -->
     <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
-        <table id="scheduleTable">
-            <thead>
-                <tr>
-                    <th class="border px-4 py-2">Batch Name</th>
-                    <th class="border px-4 py-2">Teacher</th>
-                    <th class="border px-4 py-2">Coordinator1</th>
-                    <th class="border px-4 py-2">Coordinator2</th>
-                    <th class="border px-4 py-2">Day1</th>
-                    <th class="border px-4 py-2">Day2</th>
-                    <th class="border px-4 py-2">Timing from</th>
-                    <th class="border px-4 py-2">Timing to</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data rows will be inserted here -->
-            </tbody>
-        </table>
+        <div class="table-container">
+          <table id="scheduleTable">
+              <thead>
+                  <tr>
+                      <th class="border px-4 py-2">Batch Name</th>
+                      <th class="border px-4 py-2">Teacher</th>
+                      <th class="border px-4 py-2">Coordinator1</th>
+                      <th class="border px-4 py-2">Coordinator2</th>
+                      <th class="border px-4 py-2">Day1</th>
+                      <th class="border px-4 py-2">Day2</th>
+                      <th class="border px-4 py-2">Timing from</th>
+                      <th class="border px-4 py-2">Timing to</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Data rows will be inserted here -->
+              </tbody>
+          </table>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
