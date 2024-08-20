@@ -80,13 +80,11 @@
           <table id="scheduleTable">
               <thead>
                   <tr>
-                 <!-- Timestamp	Whatsapp Group Name	Lesson Number	Students Attended	Teacher Name -->
-
                     <th class="border px-4 py-2">Timestamp</th>
-                      <th class="border px-4 py-2">Whatsapp Group Name</th>
-                      <th class="border px-4 py-2">Lesson Number</th>
-                      <th class="border px-4 py-2">Students Attended</th>
-                      <th class="border px-4 py-2">Teacher Name</th>
+                    <th class="border px-4 py-2">Whatsapp Group Name</th>
+                    <th class="border px-4 py-2">Lesson Number</th>
+                    <th class="border px-4 py-2">Students Attended</th>
+                    <th class="border px-4 py-2">Teacher Name</th>
                   </tr>
               </thead>
               <tbody>
@@ -96,20 +94,15 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Replace with your Google Drive file ID
-        const fileId = '1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w';
-        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
+        // Replace with your published CSV link
+        const url = 'https://docs.google.com/spreadsheets/d/{1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w}/gviz/tq?tqx=out:csv';
+        
         fetch(url)
-          .then(response => response.arrayBuffer())
+          .then(response => response.text())
           .then(data => {
-            // Parse the Excel file
-            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
-            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const rows = data.split('\n').map(row => row.split(','));
             const tableBody = document.querySelector('#scheduleTable tbody');
             tableBody.innerHTML = '';
 
@@ -118,21 +111,17 @@
 
               const tr = document.createElement('tr');
 
-              // Assuming row[0] to row[7] corresponds to the columns
-              for (let i = 0; i < 8; i++) {
+              row.forEach(cell => {
                 const td = document.createElement('td');
-                td.textContent = row[i] !== undefined ? row[i] : '';
+                td.textContent = cell.trim() !== '' ? cell.trim() : '';
                 td.className = 'border px-4 py-2';
-                if (i === 0) {
-                  td.classList.add('Timestamp'); // Add batch-name class to batch name column
-                }
                 tr.appendChild(td);
-              }
+              });
 
               tableBody.appendChild(tr);
             });
           })
-          .catch(error => console.error('Error loading the Excel file:', error));
+          .catch(error => console.error('Error loading the Google Sheets data:', error));
       });
     </script>
 </body>
