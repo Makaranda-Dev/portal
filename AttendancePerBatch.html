@@ -98,18 +98,24 @@
       document.addEventListener('DOMContentLoaded', function() {
         // Replace with your published CSV link
         const url = 'https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/gviz/tq?tqx=out:csv';
-        
+
         fetch(url)
           .then(response => response.text())
           .then(data => {
             console.log(data); // Debugging: Check the raw CSV data
+            
+            // Function to parse CSV data into a 2D array
+            function parseCSV(data) {
+              const rows = data.split('\n').map(row => row.split(','));
+              return rows;
+            }
 
-            // Split the CSV data into rows
-            const rows = data.trim().split('\n').map(row => row.split(','));
+            // Parse CSV data
+            const rows = parseCSV(data);
             const tableBody = document.querySelector('#scheduleTable tbody');
             tableBody.innerHTML = '';
 
-            // Check if there are rows to display
+            // Check if rows are correctly processed
             if (rows.length <= 1) {
               tableBody.innerHTML = '<tr><td colspan="5" class="border px-4 py-2 text-center">No data available</td></tr>';
               return;
