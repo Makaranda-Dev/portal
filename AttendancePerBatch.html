@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Schedule</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom Styles */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        border: 1px solid #d1d5db; /* Tailwind gray-300 */
+        padding: 4px 8px; /* Reduced padding for better fit */
+        text-align: left;
+        font-size: 0.875rem; /* Smaller font size */
+      }
+      th {
+        background-color: #f3f4f6; /* Tailwind gray-100 */
+        font-weight: bold;
+      }
+      td {
+        background-color: #ffffff;
+      }
+      tr:nth-child(even) {
+        background-color: #f9fafb; /* Tailwind gray-50 */
+      }
+      tr:nth-child(odd) {
+        background-color: #ffffff;
+      }
+      .batch-name {
+        font-size: 0.75rem; /* Even smaller font size for batch names */
+        white-space: nowrap; /* Prevent text wrapping */
+        overflow: hidden;
+        text-overflow: ellipsis; /* Show ellipsis for overflowed text */
+      }
+      .table-container {
+        overflow-x: auto; /* Handle horizontal overflow */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+      }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+  
+    <header class="bg-white shadow-md">
+      <div class="container mx-auto flex items-center justify-between py-2 px-2">
+        <div class="flex items-center">
+          <img src="./images/logo.png" alt="Logo" class="h-14 mr-2" />
+          <h1 class="text-lg font-bold hidden md:block">Makaranda</h1>
+        </div>
+        <nav class="flex flex-col md:flex-row items-center justify-center">
+          <a href="index.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Home</a>
+          <a href="AttendancePerBatch.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Schedule</a>
+          <a href="#" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Lesson Plans</a>
+          <!-- Add other navigation items here -->
+        </nav>
+        <div class="flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="border border-gray-300 rounded-md px-2 py-1 mr-2"
+          />
+          <button class="bg-blue-500 text-white px-4 py-1 rounded-md">
+            Search
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
+        <div class="table-container">
+          <table id="scheduleTable">
+              <thead>
+                  <tr>
+                 <!-- Timestamp	Whatsapp Group Name	Lesson Number	Students Attended	Teacher Name -->
+
+                    <th class="border px-4 py-2">Timestamp</th>
+                      <th class="border px-4 py-2">Whatsapp Group Name</th>
+                      <th class="border px-4 py-2">Lesson Number</th>
+                      <th class="border px-4 py-2">Students Attended</th>
+                      <th class="border px-4 py-2">Teacher Name</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Data rows will be inserted here -->
+              </tbody>
+          </table>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Replace with your Google Drive file ID
+        const fileId = '1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w';
+        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
+        fetch(url)
+          .then(response => response.arrayBuffer())
+          .then(data => {
+            // Parse the Excel file
+            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const tableBody = document.querySelector('#scheduleTable tbody');
+            tableBody.innerHTML = '';
+
+            rows.forEach((row, index) => {
+              if (index === 0) return; // Skip header row
+
+              const tr = document.createElement('tr');
+
+              // Assuming row[0] to row[7] corresponds to the columns
+              for (let i = 0; i < 8; i++) {
+                const td = document.createElement('td');
+                td.textContent = row[i] !== undefined ? row[i] : '';
+                td.className = 'border px-4 py-2';
+                if (i === 0) {
+                  td.classList.add('Timestamp'); // Add batch-name class to batch name column
+                }
+                tr.appendChild(td);
+              }
+
+              tableBody.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Error loading the Excel file:', error));
+      });
+    </script>
+</body>
+</html>
