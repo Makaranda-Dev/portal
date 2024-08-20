@@ -10,38 +10,15 @@
     />
     <style>
       /* Custom Styles */
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th, td {
-        border: 1px solid #d1d5db; /* Tailwind gray-300 */
-        padding: 4px 8px; /* Reduced padding for better fit */
-        text-align: left;
-        font-size: 0.875rem; /* Smaller font size */
-      }
-      th {
-        background-color: #f3f4f6; /* Tailwind gray-100 */
-        font-weight: bold;
-      }
-      td {
-        background-color: #ffffff;
-      }
-      tr:nth-child(even) {
-        background-color: #f9fafb; /* Tailwind gray-50 */
-      }
-      tr:nth-child(odd) {
-        background-color: #ffffff;
-      }
-      .batch-name {
-        font-size: 0.75rem; /* Even smaller font size for batch names */
-        white-space: nowrap; /* Prevent text wrapping */
-        overflow: hidden;
-        text-overflow: ellipsis; /* Show ellipsis for overflowed text */
-      }
-      .table-container {
+      .iframe-container {
         overflow-x: auto; /* Handle horizontal overflow */
         -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+        max-width: 100%; /* Ensure the iframe fits within container */
+      }
+      iframe {
+        border: none; /* Remove border from iframe */
+        width: 100%; /* Make iframe fill the container */
+        height: 600px; /* Adjust height as needed */
       }
     </style>
 </head>
@@ -76,69 +53,9 @@
     <!-- Main Content -->
     <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
-        <div class="table-container">
-          <table id="scheduleTable">
-              <thead>
-                  <tr>
-                    <th class="border px-4 py-2">Timestamp</th>
-                    <th class="border px-4 py-2">Whatsapp Group Name</th>
-                    <th class="border px-4 py-2">Teacher Name</th>
-                    <th class="border px-4 py-2">Lesson Number</th>
-                    <th class="border px-4 py-2">Students Attended</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <!-- Data rows will be inserted here -->
-              </tbody>
-          </table>
+        <div class="iframe-container">
+          <iframe src="https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/pubhtml?widget=true&amp;headers=false"></iframe>
         </div>
     </div>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Replace with your published CSV link
-        const url = 'https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/gviz/tq?tqx=out:csv';
-
-        fetch(url)
-          .then(response => response.text())
-          .then(data => {
-            console.log(data); // Debugging: Check the raw CSV data
-            
-            // Function to parse CSV data into a 2D array
-            function parseCSV(data) {
-              const rows = data.split('\n').map(row => row.split(','));
-              return rows;
-            }
-
-            // Parse CSV data
-            const rows = parseCSV(data);
-            const tableBody = document.querySelector('#scheduleTable tbody');
-            tableBody.innerHTML = '';
-
-            // Check if rows are correctly processed
-            if (rows.length <= 1) {
-              tableBody.innerHTML = '<tr><td colspan="5" class="border px-4 py-2 text-center">No data available</td></tr>';
-              return;
-            }
-
-            // Process each row and add it to the table
-            rows.forEach((row, index) => {
-              if (index === 0) return; // Skip header row
-
-              const tr = document.createElement('tr');
-
-              row.forEach(cell => {
-                const td = document.createElement('td');
-                td.textContent = cell.trim() !== '' ? cell.trim() : '';
-                td.className = 'border px-4 py-2';
-                tr.appendChild(td);
-              });
-
-              tableBody.appendChild(tr);
-            });
-          })
-          .catch(error => console.error('Error loading the Google Sheets data:', error));
-      });
-    </script>
 </body>
 </html>
