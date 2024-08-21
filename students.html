@@ -81,4 +81,59 @@
                   <tr>
                       <th class="border px-4 py-2">SL.No.</th>
                       <th class="border px-4 py-2">ST-CD</th>
-                      <th class="border px-4 py-2">Student Name<
+                      <th class="border px-4 py-2">Student Name</th>
+                      <th class="border px-4 py-2">Opted Days</th>
+                      <th class="border px-4 py-2">Timing</th>
+                      <th class="border px-4 py-2">ALLOCATED WHATSAPP-GROUP-NAME</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Data rows will be inserted here -->
+              </tbody>
+          </table>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Replace with your Google Drive file ID
+        const fileId = '1r0I5jD4rh5pCKlEZMGRUbhciz_p8STUg';
+        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
+        fetch(url)
+          .then(response => response.arrayBuffer())
+          .then(data => {
+            // Parse the Excel file
+            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const tableBody = document.querySelector('#scheduleTable tbody');
+            tableBody.innerHTML = '';
+
+            // Determine the number of columns dynamically
+            const numColumns = rows[0] ? rows[0].length : 0;
+
+            rows.forEach((row, index) => {
+              if (index === 0) return; // Skip header row
+
+              const tr = document.createElement('tr');
+
+              for (let i = 0; i < numColumns; i++) {
+                const td = document.createElement('td');
+                td.textContent = row[i] !== undefined ? row[i] : '';
+                td.className = 'border px-4 py-2';
+                if (i === 0) {
+                  td.classList.add('batch-name'); // Add batch-name class to batch name column
+                }
+                tr.appendChild(td);
+              }
+
+              tableBody.appendChild(tr);
+            });
+          })
+          .catch(error => console.error('Error loading the Excel file:', error));
+      });
+    </script>
+</body>
+</html>
