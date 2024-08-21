@@ -12,8 +12,8 @@
       /* Custom Styles */
       .iframe-container {
         overflow-x: auto; /* Handle horizontal overflow */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
         max-width: 100%; /* Ensure the iframe fits within container */
+        border: 1px solid #ddd; /* Border around iframe container */
       }
       iframe {
         border: none; /* Remove border from iframe */
@@ -27,6 +27,8 @@
       th, td {
         border: 1px solid #ddd; /* Add borders to table cells */
         padding: 8px; /* Add padding to table cells */
+        text-align: left; /* Align text to the left */
+        word-wrap: break-word; /* Wrap long words */
       }
       th {
         background-color: #f2f2f2; /* Light grey background for header cells */
@@ -65,7 +67,7 @@
     <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
         <div class="iframe-container">
-          <iframe src="https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/pubhtml?widget=true&amp;headers=false"></iframe>
+          <iframe src="https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/pubhtml?widget=true&amp;headers=false" allowfullscreen></iframe>
         </div>
     </div>
 </body>
