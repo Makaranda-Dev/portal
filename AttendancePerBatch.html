@@ -20,11 +20,22 @@
         width: 100%; /* Make iframe fill the container */
         height: 600px; /* Adjust height as needed */
       }
+      table {
+        border-collapse: collapse; /* Ensure borders collapse into a single border */
+        width: 100%; /* Make table width 100% to fit the container */
+      }
+      th, td {
+        border: 1px solid #ddd; /* Add borders to table cells */
+        padding: 8px; /* Add padding to table cells */
+      }
+      th {
+        background-color: #f2f2f2; /* Light grey background for header cells */
+        font-weight: bold; /* Bold font for header cells */
+      }
     </style>
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
-  
     <header class="bg-white shadow-md">
       <div class="container mx-auto flex items-center justify-between py-2 px-2">
         <div class="flex items-center">
