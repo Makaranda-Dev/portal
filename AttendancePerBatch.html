@@ -9,24 +9,22 @@
       rel="stylesheet"
     />
     <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
+      /* Custom Styles */
+      .iframe-container {
+        overflow-x: auto; /* Handle horizontal overflow */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+        max-width: 100%; /* Ensure the iframe fits within container */
       }
-      th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-        word-wrap: break-word;
-      }
-      th {
-        background-color: #f2f2f2;
-        font-weight: bold;
+      iframe {
+        border: none; /* Remove border from iframe */
+        width: 100%; /* Make iframe fill the container */
+        height: 600px; /* Adjust height as needed */
       }
     </style>
 </head>
 <body class="bg-gray-100">
     <!-- Header -->
+  
     <header class="bg-white shadow-md">
       <div class="container mx-auto flex items-center justify-between py-2 px-2">
         <div class="flex items-center">
@@ -55,27 +53,9 @@
     <!-- Main Content -->
     <div class="container mx-auto py-8 px-4">
         <h1 class="text-2xl font-bold mb-4">Batch Schedule</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Whatsapp Group Name</th>
-              <th>Lesson Number</th>
-              <th>Students Attended</th>
-              <th>Teacher Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>2024-08-20 09:00</td>
-              <td>Example Group</td>
-              <td>1</td>
-              <td>30</td>
-              <td>John Doe</td>
-            </tr>
-            <!-- Add more rows as needed -->
-          </tbody>
-        </table>
+        <div class="iframe-container">
+          <iframe src="https://docs.google.com/spreadsheets/d/1n3oyZAD9ueEOPJO2G4Cpjwn9l690mDLjY9LkQId1f0w/pubhtml?widget=true&amp;headers=false"></iframe>
+        </div>
     </div>
 </body>
 </html>
