@@ -14,9 +14,13 @@
     $(function(){
       $("#includedContent").load("navigation.html"); 
     });
+		   $(function(){
+      $("#includedHeaderContent").load("header.html"); 
+    });
     </script> 
   </head>
   <body>  
+	  <div id="includedHeaderContent" w3-include-html="header.html"></div>
 	  <div class="flex flex-col md:flex-row h-screen">
 
   <!-- trainingDocs -->
