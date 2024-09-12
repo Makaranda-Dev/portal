@@ -8,10 +8,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+	  <script> 
+    $(function(){
+      $("#includedContent").load("navigation.html.html"); 
+    });
+    </script> 
   </head>
   <body>  
   <!-- trainingDocs -->
-	<div w3-include-html="navigation.html"></div>
+	<div id="includedContent" w3-include-html="navigation.html"></div>
         <div
           class="container mx-auto py-8 px-4 content"
           id="trainingDocs"
