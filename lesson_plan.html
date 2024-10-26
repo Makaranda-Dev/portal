@@ -17,9 +17,6 @@
 		   $(function(){
       $("#includedHeaderContent").load("header.html"); 
     });
-    $(function(){
-      $("#lesson5Plan").load("lesson5_plan.html"); 
-    });
     </script> 
   </head>
   <body>  
@@ -554,7 +551,14 @@
             <!-- Lesson4-PartE--end -->
 		  
 	    <tr>
-	      <div id="lesson5Plan" w3-include-html="lesson5_plan.html"></div>
+	      <div id="lesson5Plan" w3-include-html="lesson5_plan.html">
+	        <script>
+		  $(function(){
+                   $("#lesson5Plan").load("lesson5_plan.html"); 
+                 });
+
+		</script>
+	      </div>
             </tr>		  
           </table>
 		
