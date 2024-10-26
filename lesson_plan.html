@@ -30,8 +30,11 @@
         >
           <h2 class="text-2xl font-bold mb-2">Lesson Plans</h2>
           <h4 class="text-2xl">Note: Each session is of 1 hour duration</h4>
+
           <table>
-            <tr>
+        <!-- previousrow div start -->		  
+	  <div id="previousrow">
+	   <tr>
 	      <th>Day</th>
               <th>Session</th>
               <th>Topic</th>
@@ -549,16 +552,23 @@
               </td>
             </tr>
             <!-- Lesson4-PartE--end -->
-		  
+            <!-- previousrow div end -->
+	  </div>
 	    <tr>
-	      <div id="lesson5Plan" w3-include-html="lesson5_plan.html">
-	        <script>
-		  $(function(){
-                   $("#lesson5Plan").load("lesson5_plan.html"); 
-                 });
-
-		</script>
+              <!-- Lesson5-Div--start -->
+	      <div id="lesson5Plan">
+		<script>
+		
+		    document.getElementById('previousrow').addEventListener('DOMContentLoaded', function() {
+		
+	             $("#lesson5Plan").load("lesson5_plan.html"); 
+		
+		    });
+		
+		</script>			  
+		      
 	      </div>
+              <!-- Lesson5-Div--end -->
             </tr>		  
           </table>
 		
