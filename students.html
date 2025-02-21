@@ -68,40 +68,12 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const fileId = '1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4'; // Updated file ID
-        const url = `https://docs.google.com/spreadsheets/d/${fileid}/export?format=xlsx`;
+        const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
 
         fetch(url)
-          .then(response => response.json())
+          .then(response => response.arrayBuffer())  // Fetch the binary data (xlsx)
           .then(data => {
-            const rows = data.values;
-            const tableBody = document.querySelector('#scheduleTable tbody');
-            tableBody.innerHTML = '';
-
-            if (rows && rows.length > 1) {
-              // Loop through data rows and insert them into the table
-              rows.forEach((row, index) => {
-                if (index === 0) return; // Skip header row
-
-                const tr = document.createElement('tr');
-
-                row.forEach((cell, i) => {
-                  const td = document.createElement('td');
-                  td.textContent = cell !== undefined ? cell : '';
-                  td.className = 'border px-4 py-2';
-                  tr.appendChild(td);
-                });
-
-                tableBody.appendChild(tr);
-              });
-            } else {
-              tableBody.innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">No data available</td></tr>';
-            }
-          })
-          .catch(error => console.error('Error loading the Google Sheets data:', error));
-      });
-    </script>
-</body>
-</html>
