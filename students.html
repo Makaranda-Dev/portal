@@ -18,19 +18,21 @@
           rows.forEach((row, index) => {
             if (index === 0) return; // Skip the header row
 
-            // Filter out empty columns in the row
+            // Filter out any completely empty cells in the row
             const filteredRow = row.filter(cell => cell !== undefined && cell !== null && cell !== '');
 
-            // If the row contains any data, create the table row
+            // Only process rows with data (ignore rows with no content)
             if (filteredRow.length > 0) {
               const tr = document.createElement('tr');
 
-              // Limit to first 4 columns
+              // Add only up to 4 columns (adjust if you have more columns)
               for (let i = 0; i < 4; i++) {
-                const td = document.createElement('td');
-                td.textContent = filteredRow[i] !== undefined ? filteredRow[i] : ''; // Handle undefined
-                td.className = 'border px-4 py-2';
-                tr.appendChild(td);
+                if (filteredRow[i] !== undefined) {
+                  const td = document.createElement('td');
+                  td.textContent = filteredRow[i]; // Set the cell value
+                  td.className = 'border px-4 py-2';
+                  tr.appendChild(td);
+                }
               }
 
               tableBody.appendChild(tr); // Append the row to the table body
