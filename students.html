@@ -97,14 +97,21 @@
               rows.forEach((row, index) => {
                 if (index === 0) return; // Skip the header row
 
-                // Only keep the first 4 columns (Student Name, Mobile #, WhatsApp Group, Teachers Name)
+                // Only keep the first 4 columns (SL.No., Student Name, Mobile #, WhatsApp Group, Teachers Name)
                 const filteredRow = row.slice(0, 5);
 
                 // Add a row only if there is data
                 if (filteredRow.length > 0) {
                   const tr = document.createElement('tr');
 
-                  filteredRow.forEach(cell => {
+                  // Insert Serial Number (SL.No.)
+                  const slNo = document.createElement('td');
+                  slNo.textContent = index; // SL.No. is the index
+                  slNo.className = 'border px-4 py-2';
+                  tr.appendChild(slNo);
+
+                  // Loop through the filtered row and append the rest of the data
+                  filteredRow.slice(1).forEach(cell => {
                     const td = document.createElement('td');
                     td.textContent = cell || ''; // Set the cell value
                     td.className = 'border px-4 py-2';
