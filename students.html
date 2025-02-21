@@ -71,9 +71,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        const fileId = '1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4'; // Updated file ID
+        const fileId = '1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4'; // Correct File ID
         const url = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
 
         fetch(url)
           .then(response => response.arrayBuffer())  // Fetch the binary data (xlsx)
           .then(data => {
+            // Parse the Excel file using the XLSX library
+            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
+            const sheetName = workbook.SheetNames[0];  // Get the first sheet name
+            const sheet = workbook.Sheets[sheetName];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });  // Convert sheet to JSON
+
+            const tableBody = document.querySelector('#scheduleTable tbody');
+            tableBody.innerHTML = ''; // Clear existing table data
+
+            if (rows && rows.length > 1) {
+              // Loop through data rows and insert them into the table
+              rows.forEach((row, index) => {
+                if (index === 0) return;  // Skip the header row
+
+                const tr = document.createElement('tr');
+
+                row.forEach((cell, i) => {
+                  const td = document.createElement('td');
+                  td.textContent = cell !== undefined ? cell : '';  // Avoid undefined values
+                  td.className = 'border px-4 py-2';
+                  tr.appendChild(td);
+                });
+
+                tableBody.appendChild(tr);  // Append row to table
+              });
+            } else {
+              tableBody.innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">No data available</td></tr>';
+            }
+          })
+          .catch(error => {
+            console.error('Error loading the Google Sheets data:', error);
+            // Display a friendly message in case of failure
+            document.querySelector('#scheduleTable tbody').innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">Failed to load data</td></tr>';
+          });
+      });
+    </script>
+</body>
+</html>
