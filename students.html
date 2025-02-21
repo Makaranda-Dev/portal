@@ -71,7 +71,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const fileId = '1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4'; // Updated file ID
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/Sheet1?key=YOUR_API_KEY`;
+        const url = `https://docs.google.com/spreadsheets/d/${fileid}/export?format=xlsx`;
 
         fetch(url)
           .then(response => response.json())
