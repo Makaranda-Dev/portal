@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Students</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <style>
       /* Custom Styles */
       table {
@@ -15,33 +12,23 @@
         width: 100%;
       }
       th, td {
-        border: 1px solid #d1d5db; /* Tailwind gray-300 */
-        padding: 4px 8px; /* Reduced padding for better fit */
+        border: 1px solid #d1d5db;
+        padding: 4px 8px;
         text-align: left;
-        font-size: 0.875rem; /* Smaller font size */
+        font-size: 0.875rem;
       }
       th {
-        background-color: #f3f4f6; /* Tailwind gray-100 */
+        background-color: #f3f4f6;
         font-weight: bold;
       }
       td {
         background-color: #ffffff;
       }
       tr:nth-child(even) {
-        background-color: #f9fafb; /* Tailwind gray-50 */
+        background-color: #f9fafb;
       }
       tr:nth-child(odd) {
         background-color: #ffffff;
-      }
-      .batch-name {
-        font-size: 0.75rem; /* Even smaller font size for batch names */
-        white-space: nowrap; /* Prevent text wrapping */
-        overflow: hidden;
-        text-overflow: ellipsis; /* Show ellipsis for overflowed text */
-      }
-      .table-container {
-        overflow-x: auto; /* Handle horizontal overflow */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
       }
     </style>
 </head>
@@ -57,18 +44,7 @@
           <a href="new.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Home</a>
           <a href="Students.html" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Students</a>
           <a href="#" class="hidden md:inline-block text-gray-600 hover:text-gray-900 px-4">Lesson Plans</a>
-          <!-- Add other navigation items here -->
         </nav>
-        <div class="flex items-center">
-          <input
-            type="text"
-            placeholder="Search..."
-            class="border border-gray-300 rounded-md px-2 py-1 mr-2"
-          />
-          <button class="bg-blue-500 text-white px-4 py-1 rounded-md">
-            Search
-          </button>
-        </div>
       </div>
     </header>
 
@@ -81,7 +57,7 @@
                   <tr>
                       <th class="border px-4 py-2">Student Name</th>
                       <th class="border px-4 py-2">Mobile #</th>
-                      <th class="border px-4 py-2">WhatsAp GroupName</th>
+                      <th class="border px-4 py-2">WhatsApp GroupName</th>
                       <th class="border px-4 py-2">Teachers Name</th>
                   </tr>
               </thead>
@@ -92,50 +68,39 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Update the file ID to the new Google Sheets file ID
         const fileId = '1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4'; // Updated file ID
-        const url = `https://docs.google.com/spreadsheets/d/1-bTzoAKqs391UJou5yrn2MOPWCR3b5mh5kVrjbZ5cg4/export?format=xlsx`;
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${fileId}/values/Sheet1?key=YOUR_API_KEY`;
 
         fetch(url)
-          .then(response => response.arrayBuffer())
+          .then(response => response.json())
           .then(data => {
-            // Parse the Excel file
-            const workbook = XLSX.read(new Uint8Array(data), { type: 'array' });
-            const sheetName = workbook.SheetNames[0];
-            const sheet = workbook.Sheets[sheetName];
-            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const rows = data.values;
             const tableBody = document.querySelector('#scheduleTable tbody');
             tableBody.innerHTML = '';
 
-            if (rows.length > 1) {
+            if (rows && rows.length > 1) {
               // Loop through data rows and insert them into the table
               rows.forEach((row, index) => {
                 if (index === 0) return; // Skip header row
 
                 const tr = document.createElement('tr');
 
-                // Adjust the number of columns based on the row length
                 row.forEach((cell, i) => {
                   const td = document.createElement('td');
                   td.textContent = cell !== undefined ? cell : '';
                   td.className = 'border px-4 py-2';
-                  if (i === 0) {
-                    td.classList.add('batch-name'); // Add batch-name class to batch name column
-                  }
                   tr.appendChild(td);
                 });
 
                 tableBody.appendChild(tr);
               });
             } else {
-              // Handle case where no data rows exist
-              tableBody.innerHTML = '<tr><td colspan="6" class="border px-4 py-2 text-center">No data available</td></tr>';
+              tableBody.innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">No data available</td></tr>';
             }
           })
-          .catch(error => console.error('Error loading the Excel file:', error));
+          .catch(error => console.error('Error loading the Google Sheets data:', error));
       });
     </script>
 </body>
