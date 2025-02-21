@@ -18,17 +18,28 @@
           rows.forEach((row, index) => {
             if (index === 0) return; // Skip the header row
 
-            const tr = document.createElement('tr');
+            // Filter out empty columns in the row
+            const filteredRow = row.filter(cell => cell !== undefined && cell !== null && cell !== '');
 
-            // Only process the first 4 columns
-            for (let i = 0; i < 4; i++) {
-              const td = document.createElement('td');
-              td.textContent = row[i] !== undefined ? row[i] : ''; // Prevent undefined values
-              td.className = 'border px-4 py-2';
-              tr.appendChild(td);
+            // If the row contains any data, create the table row
+            if (filteredRow.length > 0) {
+              const tr = document.createElement('tr');
+
+              // Limit to first 4 columns
+              for (let i = 0; i < 4; i++) {
+                const td = document.createElement('td');
+                td.textContent = filteredRow[i] !== undefined ? filteredRow[i] : ''; // Handle undefined
+                td.className = 'border px-4 py-2';
+                tr.appendChild(td);
+              }
+
+              tableBody.appendChild(tr); // Append the row to the table body
             }
-
-            tableBody.appendChild(tr); // Append the row to the table body
           });
         } else {
-          tableBody.innerHTML = '<tr><td colspan="4" class="border
+          tableBody.innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">No data available</td></tr>';
+        }
+      })
+      .catch(error => console.error('Error loading the Excel file:', error));
+  });
+</script>
