@@ -98,7 +98,7 @@
                 if (index === 0) return; // Skip the header row
 
                 // Only keep the first 4 columns (Student Name, Mobile #, WhatsApp Group, Teachers Name)
-                const filteredRow = row.slice(0, 4);
+                const filteredRow = row.slice(0, 5);
 
                 // Add a row only if there is data
                 if (filteredRow.length > 0) {
@@ -115,7 +115,7 @@
                 }
               });
             } else {
-              tableBody.innerHTML = '<tr><td colspan="4" class="border px-4 py-2 text-center">No data available</td></tr>';
+              tableBody.innerHTML = '<tr><td colspan="5" class="border px-4 py-2 text-center">No data available</td></tr>';
             }
           })
           .catch(error => console.error('Error loading the Excel file:', error));
